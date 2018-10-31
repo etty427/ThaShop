@@ -49,6 +49,7 @@ final class HomeItemsTableViewCell: UITableViewCell {
         label.font = UIFont(name: "Times Roman", size: 12)
         label.textColor = .lightGray
         label.textAlignment = .center
+        label.frame = CGRect(x: 0, y: 0, width: 100, height: 15)
         return label
     }()
     
@@ -70,7 +71,7 @@ final class HomeItemsTableViewCell: UITableViewCell {
     
     let vc = FirstViewController()
   
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: vc.cellId)
         
         addSubview(likesLabel)
@@ -90,7 +91,7 @@ final class HomeItemsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = UIEdgeInsetsInsetRect(contentView.frame, UIEdgeInsetsMake(5, 5, 5, 5))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets.init(top: 5, left: 5, bottom: 5, right: 5))
     }
     
     func setupCell() {
@@ -102,7 +103,8 @@ final class HomeItemsTableViewCell: UITableViewCell {
             itemLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
             
             priceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 220),
-            priceLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 290),
+            priceLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 260),
+            priceLabel.widthAnchor.constraint(equalToConstant: 100),
             
             likeButton.topAnchor.constraint(equalTo: topAnchor, constant: 240),
             likeButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),

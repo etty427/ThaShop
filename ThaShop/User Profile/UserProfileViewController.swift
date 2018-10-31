@@ -15,10 +15,22 @@ final class UserProfileViewController: UIViewController {
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
+    
+    var logoutButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("LOGOUT", for: .normal)
+        button.setTitleColor(UIColor(named: "white"), for: .normal)
+        button.frame = CGRect(x: 15, y: 500, width: 346, height: 40)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .red
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.addSubview(logoutButton)
+        //view.backgroundColor = .lightGray
         configureTableView()
         setupNav()
         setupView()
@@ -36,9 +48,12 @@ final class UserProfileViewController: UIViewController {
         profileTableView.separatorStyle = .none
         profileTableView.delegate = self
         profileTableView.dataSource = self
-        profileTableView.contentInset.right = 10
-        profileTableView.frame = CGRect(x: 0, y: 20, width: view.frame.width, height: 400)
-        profileTableView.register(UITableViewCell.self, forCellReuseIdentifier: "profile")
+        profileTableView.isScrollEnabled = false
+        profileTableView.bounces = false
+        profileTableView.allowsSelection = false
+        profileTableView.center = view.center
+        profileTableView.frame = CGRect(x: 10, y: 20, width: 370, height: 470)
+        profileTableView.register(UINib(nibName: "UserProfileTableViewCell", bundle: nil), forCellReuseIdentifier: "profile")
         
         view.addSubview(profileTableView)
     }
@@ -57,8 +72,8 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "Test Code"
+        let cell = profileTableView.dequeueReusableCell(withIdentifier: "profile", for: indexPath) as! UserProfileTableViewCell
+        
         return cell
     }
     

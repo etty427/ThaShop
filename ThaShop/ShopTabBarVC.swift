@@ -13,7 +13,6 @@ final class ShopTabBarVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         tabBar.barTintColor = .black
         tabBar.tintColor = .white
     }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SlideMenuDelegate {
+    func slideMenuSelectedAtIndex(_ index: Int32)
+}
+
 final class FirstViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     lazy private var navButtonView: UIView = {
@@ -33,37 +37,52 @@ final class FirstViewController: UIViewController, UITableViewDataSource, UITabl
     lazy private var homeItemsDetailController: UIViewController = {
         let vc = HomeItemsDetailController()
         vc.view.backgroundColor = .white
-        addChildViewController(vc)
-        vc.didMove(toParentViewController: self)
+        addChild(vc)
+        vc.didMove(toParent: self)
         return vc
+    }()
+    lazy private var menuView: UIView = {
+        let view = UIView()
+        return view
     }()
     
     let cellId = "cell"
+    var itemList:[Item] = []
+    var delegate: SlideMenuDelegate?
+    let images = ["ipad","fitbit","beats","s9","watch"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)]
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)]
         let searchButton = UIBarButtonItem(image: UIImage(named: "searchbutton"), style: .plain, target: self, action: nil)
         searchButton.tintColor = .white
         self.navigationItem.rightBarButtonItem = searchButton
         
-        let menuButton = UIBarButtonItem(image: UIImage(named: "menubutton"), style: .plain, target: self, action: nil)
+        let menuButton = UIBarButtonItem(image: UIImage(named: "menubutton"), style: .plain, target: self, action: #selector(slideOutMenu))
         menuButton.tintColor = .white
         self.navigationItem.leftBarButtonItem  = menuButton
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .white
-
+        menuView.isHidden = true
+        
         setupNavButtonViews()
-        homeItemsDetailController.willMove(toParentViewController: nil)
+        loadJson()
+        homeItemsDetailController.willMove(toParent: nil)
         homeItemsDetailController.view.removeFromSuperview()
-        homeItemsDetailController.removeFromParentViewController()
+        homeItemsDetailController.removeFromParent()
     }
     
     private func setupNavButtonViews() {
         navButtonView.translatesAutoresizingMaskIntoConstraints = false
         navButtonView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
         navButtonView.backgroundColor = .black
+        
+        menuView.translatesAutoresizingMaskIntoConstraints = false
+        menuView.backgroundColor = .lightGray
+        menuView.layer.borderWidth = 3
+        let red = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+        menuView.layer.borderColor = red.cgColor
+        menuView.frame = CGRect(x: 0, y: 50, width: 300, height: view.frame.height)
         
         allButton.translatesAutoresizingMaskIntoConstraints = false
         allButton.backgroundColor = .red
@@ -104,6 +123,7 @@ final class FirstViewController: UIViewController, UITableViewDataSource, UITabl
             trendingButton.widthAnchor.constraint(equalToConstant: 105),
             ])
         configureTableView()
+        view.addSubview(menuView)
     }
     
     private func configureTableView() {
@@ -118,8 +138,40 @@ final class FirstViewController: UIViewController, UITableViewDataSource, UITabl
         view.addSubview(itemTableView)
     }
     
+    @objc func slideOutMenu() {
+        //menuView.isHidden = !menuView.isHidden
+       menuView.slideInFromLeft()
+    }
+    
+    private func loadJson() {
+        
+        let url = Bundle.main.url(forResource: "items", withExtension: "json")
+        let data = NSData(contentsOf: url!)
+        do {
+            let object = try JSONSerialization.jsonObject(with: data! as Data, options: .allowFragments)
+            if let dictionary = object as? [String:AnyObject]{
+                    for inv in dictionary.values {
+                        let items = inv as? Array<Any>
+                        for stuff in items! {
+                            if let inventory = stuff as? [String:AnyObject] {
+                                let title = inventory["title"] as! String
+                                let price = inventory["price"] as! NSNumber
+                                let comments = inventory["comments"] as! Int
+                                let likes = inventory["likes"] as! Int
+                                let list = Item(image: "", title: title, price: Int(truncating: price), comments: comments, likes: likes)
+                                itemList.append(list)
+                            }
+                        }
+                    }
+            }
+        } catch {
+            // Handle Error
+            print("Error")
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return itemList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -128,7 +180,12 @@ final class FirstViewController: UIViewController, UITableViewDataSource, UITabl
         cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
         cell.contentView.layer.cornerRadius = 15
         cell.contentView.layer.masksToBounds = true
-        cell.itemImageView.image = UIImage(named: "clouds")
+        cell.itemImageView.image = UIImage(named: images[indexPath.row])
+        
+        let item = itemList[indexPath.row]
+        cell.priceLabel.text = String("$\(item.price)")
+        cell.itemLabel.text = item.title
+        cell.likesLabel.text = "\(item.likes)"
         return cell
     }
     
@@ -141,5 +198,26 @@ final class FirstViewController: UIViewController, UITableViewDataSource, UITabl
         navigationController?.pushViewController(homeItemsDetailController, animated: true)
     }
 }
-
-
+extension UIView {
+    // Name this function in a way that makes sense to you...
+    // slideFromLeft, slideRight, slideLeftToRight, etc. are great alternative names
+    func slideInFromLeft(duration: TimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+        // Create a CATransition animation
+        let slideInFromLeftTransition = CATransition()
+        
+        // Set its callback delegate to the completionDelegate that was provided (if any)
+        if let delegate: AnyObject = completionDelegate {
+            slideInFromLeftTransition.delegate = delegate as? CAAnimationDelegate
+        }
+        
+        // Customize the animation's properties
+        slideInFromLeftTransition.type = CATransitionType.push
+        slideInFromLeftTransition.subtype = CATransitionSubtype.fromLeft
+        slideInFromLeftTransition.duration = duration
+        slideInFromLeftTransition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        slideInFromLeftTransition.fillMode = CAMediaTimingFillMode.removed
+        
+        // Add the animation to the View's layer
+        self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
+    }
+}

@@ -21,8 +21,8 @@ final class NewsViewController: UIViewController {
     lazy private var newsDetailViewController: UIViewController = {
         let vc = NewsDetailViewController()
         vc.view.backgroundColor = .white
-        addChildViewController(vc)
-        vc.didMove(toParentViewController: self)
+        addChild(vc)
+        vc.didMove(toParent: self)
         return vc
     }()
     

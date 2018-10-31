@@ -9,7 +9,18 @@
 import Foundation
 
 struct Item {
-let image : String
-let title: String
-let price: String
+    let image : String
+    let title: String
+    let price: Int
+    let comments: Int
+    let likes: Int
+    
+    init(image:String,title:String,price:Int,comments:Int, likes:Int) {
+        
+        self.image = image
+        self.title = title
+        self.price = price
+        self.comments = comments
+        self.likes = likes
+    }
 }

@@ -10,6 +10,7 @@
 		340E3D9B2159D46200778ECC /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E3D9A2159D46200778ECC /* UserProfileViewController.swift */; };
 		340E3D9D2159D61600778ECC /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E3D9C2159D61600778ECC /* UserViewModel.swift */; };
 		340E3DA02159D65E00778ECC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E3D9F2159D65E00778ECC /* User.swift */; };
+		342972152188363E00736175 /* items.json in Resources */ = {isa = PBXBuildFile; fileRef = 342972142188363E00736175 /* items.json */; };
 		34439D3C213F844700D11713 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34439D3B213F844700D11713 /* AppDelegate.swift */; };
 		34439D3E213F844700D11713 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34439D3D213F844700D11713 /* FirstViewController.swift */; };
 		34439D40213F844700D11713 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34439D3F213F844700D11713 /* NewsViewController.swift */; };
@@ -20,7 +21,6 @@
 		34439D5E213F844F00D11713 /* ThaShopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34439D5D213F844F00D11713 /* ThaShopUITests.swift */; };
 		34439D6C213F881500D11713 /* ShopTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34439D6B213F881500D11713 /* ShopTabBarVC.swift */; };
 		3474C847215D5D3D0004420B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3474C846215D5D3D0004420B /* API.swift */; };
-		3474C849215D5DB30004420B /* inventory.json in Resources */ = {isa = PBXBuildFile; fileRef = 3474C848215D5DB30004420B /* inventory.json */; };
 		3474C84B215D5DDA0004420B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3474C84A215D5DDA0004420B /* Item.swift */; };
 		3474C84E215D91520004420B /* UserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3474C84C215D91520004420B /* UserProfileTableViewCell.swift */; };
 		3474C84F215D91520004420B /* UserProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3474C84D215D91520004420B /* UserProfileTableViewCell.xib */; };
@@ -55,6 +55,7 @@
 		340E3D9A2159D46200778ECC /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		340E3D9C2159D61600778ECC /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		340E3D9F2159D65E00778ECC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		342972142188363E00736175 /* items.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = items.json; sourceTree = "<group>"; };
 		34439D38213F844700D11713 /* ThaShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThaShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34439D3B213F844700D11713 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34439D3D213F844700D11713 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		34439D5F213F844F00D11713 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34439D6B213F881500D11713 /* ShopTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTabBarVC.swift; sourceTree = "<group>"; };
 		3474C846215D5D3D0004420B /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		3474C848215D5DB30004420B /* inventory.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = inventory.json; sourceTree = "<group>"; };
 		3474C84A215D5DDA0004420B /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		3474C84C215D91520004420B /* UserProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewCell.swift; sourceTree = "<group>"; };
 		3474C84D215D91520004420B /* UserProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 				34439D44213F844E00D11713 /* Assets.xcassets */,
 				34439D41213F844700D11713 /* Main.storyboard */,
 				34439D46213F844E00D11713 /* LaunchScreen.storyboard */,
-				3474C848215D5DB30004420B /* inventory.json */,
+				342972142188363E00736175 /* items.json */,
 				34439D49213F844E00D11713 /* Info.plist */,
 			);
 			path = ThaShop;
@@ -319,13 +319,16 @@
 				TargetAttributes = {
 					34439D37213F844700D11713 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					34439D4D213F844F00D11713 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 34439D37213F844700D11713;
 					};
 					34439D58213F844F00D11713 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 34439D37213F844700D11713;
 					};
 				};
@@ -355,8 +358,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3474C849215D5DB30004420B /* inventory.json in Resources */,
 				34439D48213F844E00D11713 /* LaunchScreen.storyboard in Resources */,
+				342972152188363E00736175 /* items.json in Resources */,
 				34439D45213F844E00D11713 /* Assets.xcassets in Resources */,
 				349936A02180CD1F009B32EB /* CartCell.xib in Resources */,
 				34439D43213F844700D11713 /* Main.storyboard in Resources */,
@@ -583,7 +586,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rainmantechnologies.ThaShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -601,7 +604,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rainmantechnologies.ThaShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -621,7 +624,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rainmantechnologies.ThaShopTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ThaShop.app/ThaShop";
 			};
@@ -642,7 +645,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rainmantechnologies.ThaShopTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ThaShop.app/ThaShop";
 			};
@@ -662,7 +665,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rainmantechnologies.ThaShopUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ThaShop;
 			};
@@ -682,7 +685,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rainmantechnologies.ThaShopUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ThaShop;
 			};

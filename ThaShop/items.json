@@ -1,0 +1,40 @@
+
+{
+    "inventory": [
+        {
+            "id":0,
+            "title":"iPad Pro (128 GB) - Space Gray",
+            "price":949.99,
+            "comments":700,
+            "likes":450,
+        },
+        {
+            "id":1,
+            "title":"FitBit Charge - Blue Medium",
+            "price":199.99,
+            "comments":1990,
+            "likes":213,
+        },
+        {
+            "id":2,
+            "title":"Beats Headphones",
+            "price":99.99,
+            "comments":1500,
+            "likes":230,
+        },
+        {
+            "id":3,
+            "title":"Samsung Galaxy S9",
+            "price":850.00,
+            "comments":60,
+            "likes":123,
+        },
+        {
+            "id":4,
+            "title":"Apple Watch 5th Generation",
+            "price":799.99,
+            "comments":59,
+            "likes":100,
+        }
+    ],
+}
