@@ -8,8 +8,8 @@
 
 import UIKit
 
-final class CartViewController: UIViewController {
-    
+final class CartViewController: UIViewController, AddItemsToCart {
+    var item: [Cart] = []
     let cellID = "cart"
     
     let cartCollectionView: UICollectionView = {
@@ -65,8 +65,20 @@ final class CartViewController: UIViewController {
         label.text = "$500.00"
         return label
     }()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if item.isEmpty {
+            let alert = UIAlertController(title: "Cart Items", message: "Your cart is empty", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
+        }
+        cartCollectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(item.count)
         cartCollectionView.delegate = self
         cartCollectionView.dataSource = self
         
@@ -78,6 +90,7 @@ final class CartViewController: UIViewController {
         view.addSubview(taxLabelPrice)
         view.addSubview(totalLabelPrice)
         
+        print("List: ",item)
         setupLabels()
     }
     
@@ -106,13 +119,18 @@ final class CartViewController: UIViewController {
 
 extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return item.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = cartCollectionView.dequeueReusableCell(withReuseIdentifier: "cart", for: indexPath) as! CartCell
-        cell.itemName.text = "New iPhone 35 35TB"
-        cell.priceLabel.text = "$45,000"
+        let cart = item[indexPath.row]
+        let vc = HomeItemsDetailController()
+        cell.itemName.text = cart.itemName 
+        cell.priceLabel.text = cart.priceLabel
+        cell.quantityLabel.text = "1"
+        cell.itemImage.image = UIImage(named: vc.imagePassed)
+        
         return cell
     }
     

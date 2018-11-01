@@ -8,7 +8,13 @@
 
 import UIKit
 
-final class HomeItemsDetailController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+protocol AddItemsToCart {
+    var item: [Cart] { get set }
+}
+
+final class HomeItemsDetailController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddItemsToCart {
+    var item: [Cart] = []
+    
     
     lazy var favButton: UIButton = {
         let button = UIButton()
@@ -73,6 +79,7 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("ADD TO CART", for: .normal)
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
         button.backgroundColor = .red
         return button
     }()
@@ -80,7 +87,7 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
     lazy private var likeCollectionview: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let myCollectionView:UICollectionView = UICollectionView(frame: CGRect(x: 0, y: 410, width: view.frame.width, height: 60), collectionViewLayout: layout)
+        let myCollectionView:UICollectionView = UICollectionView(frame: CGRect(x: 0, y: 460, width: view.frame.width, height: 60), collectionViewLayout: layout)
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         myCollectionView.backgroundColor = .white
@@ -91,11 +98,33 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
         myCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return myCollectionView
     }()
+    
+    let vc = HomeViewController()
+    let cellId = "details"
+    var titlePassed = ""
+    var pricePassed = ""
+    var commentsPassed = ""
+    var likesPassed = ""
+    var imagePassed = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Product Details"
         setupDetails()
+        priceLabel.text = "$" + pricePassed
+        itemLabel.text = titlePassed
+        likesLabel.text = likesPassed
+        itemImageView.image = UIImage(named: imagePassed)
+        view.backgroundColor = .white
+    }
+    
+    @objc func addToCart() {
+        print("Added to cart!")
+        addToCardButton.setTitle("Added to Cart", for: .normal)
+        let cart = Cart(itemImage: imagePassed, itemName: titlePassed, price: pricePassed)
+        let vc = CartViewController()
+        vc.item.append(cart)
+        
     }
 
     private func setupDetails() {

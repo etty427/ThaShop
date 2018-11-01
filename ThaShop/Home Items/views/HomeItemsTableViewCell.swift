@@ -69,7 +69,7 @@ final class HomeItemsTableViewCell: UITableViewCell {
         return view
     }()
     
-    let vc = FirstViewController()
+    let vc = HomeViewController()
   
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: vc.cellId)

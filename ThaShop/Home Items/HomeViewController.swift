@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  HomeViewController.swift
 //  ThaShop
 //
 //  Created by Ty rainey on 9/4/18.
@@ -12,7 +12,7 @@ protocol SlideMenuDelegate {
     func slideMenuSelectedAtIndex(_ index: Int32)
 }
 
-final class FirstViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+final class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     lazy private var navButtonView: UIView = {
         let view = UIView()
@@ -168,6 +168,7 @@ final class FirstViewController: UIViewController, UITableViewDataSource, UITabl
             // Handle Error
             print("Error")
         }
+        itemTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -183,7 +184,7 @@ final class FirstViewController: UIViewController, UITableViewDataSource, UITabl
         cell.itemImageView.image = UIImage(named: images[indexPath.row])
         
         let item = itemList[indexPath.row]
-        cell.priceLabel.text = String("$\(item.price)")
+        cell.priceLabel.text = "$" + "\(item.price)"
         cell.itemLabel.text = item.title
         cell.likesLabel.text = "\(item.likes)"
         return cell
@@ -195,7 +196,15 @@ final class FirstViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        navigationController?.pushViewController(homeItemsDetailController, animated: true)
+            let vc = HomeItemsDetailController()
+            let maindata = itemList[indexPath.row]
+            let image = images[indexPath.row]
+            vc.titlePassed = maindata.title
+            vc.likesPassed = "\(maindata.likes)"
+            vc.commentsPassed = "\(maindata.comments)"
+            vc.pricePassed = "\(maindata.price)"
+            vc.imagePassed = image
+            navigationController?.pushViewController(vc, animated: true)
     }
 }
 extension UIView {
