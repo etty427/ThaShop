@@ -78,11 +78,11 @@ final class NewsViewController: UIViewController {
         newsTableView.translatesAutoresizingMaskIntoConstraints = false
         newsTableView.delegate = self
         newsTableView.dataSource = self
-        newsTableView.contentInset.right = 10
+        newsTableView.rowHeight = UITableView.automaticDimension
         newsTableView.showsHorizontalScrollIndicator = false
         newsTableView.showsVerticalScrollIndicator = false
         newsTableView.bounces = false
-        newsTableView.frame = CGRect(x: 0, y: 20, width: view.frame.width, height: 520)
+        newsTableView.frame = CGRect(x: 0, y: 20, width: view.frame.width, height: view.frame.height)
         
         view.addSubview(newsTableView)
     }
@@ -96,15 +96,18 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NewsCell
-        cell.title.lineBreakMode = .byTruncatingTail
-        cell.title.numberOfLines = 3
+        cell.title.lineBreakMode = .byTruncatingHead
         cell.title.text = articles[indexPath.row].headline
         //cell.imageView?.downloadImage(from: articles[indexPath.row].urlImage!)
         return cell
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 70
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
