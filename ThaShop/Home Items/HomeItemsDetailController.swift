@@ -8,14 +8,10 @@
 
 import UIKit
 
-protocol AddItemsToCart {
-    var item: [Cart] { get set }
-}
 
-final class HomeItemsDetailController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddItemsToCart {
-    var item: [Cart] = []
-    
-    
+
+final class HomeItemsDetailController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+   
     lazy var favButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +24,7 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "heart"), for: .normal)
-        button.frame = CGRect(x: 0, y: 0, width: 10, height: 30)
+        button.frame = CGRect(x: 0, y: 20, width: 40, height: 40)
         return button
     }()
     
@@ -62,7 +58,7 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "200 likes"
-        label.font = UIFont.boldSystemFont(ofSize: 8)
+        label.font = UIFont.boldSystemFont(ofSize: 10)
         label.textColor = .black
         return label
     }()
@@ -70,7 +66,21 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .lightGray
-        view.frame = CGRect(x: 20, y: 260, width: 330, height: 0.5)
+        return view
+    }()
+    
+    lazy var imageLikesLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        //label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont(name: "Times Roman", size: 15)
+        label.textColor = .black
+        return label
+    }()
+    lazy var separatorView2: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .lightGray
         return view
     }()
     
@@ -94,7 +104,7 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
         myCollectionView.contentInset.left = 10
         myCollectionView.contentInset.right = 10
         myCollectionView.showsHorizontalScrollIndicator = false
-        myCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
+        myCollectionView.register(UINib(nibName: "HomeDetailCellCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MyCell")
         myCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return myCollectionView
     }()
@@ -106,6 +116,7 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
     var commentsPassed = ""
     var likesPassed = ""
     var imagePassed = ""
+    let picImages = ["guy1","guy2","guy3","girl1","girl2","girl3"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,16 +130,14 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
     }
     
     @objc func addToCart() {
-        print("Added to cart!")
         addToCardButton.setTitle("Added to Cart", for: .normal)
-        let cart = Cart(itemImage: imagePassed, itemName: titlePassed, price: pricePassed)
-        let vc = CartViewController()
-        vc.item.append(cart)
-        
+        let tabbar = tabBarController as! ShopTabBarVC
+        tabbar.cart.append(tabbar.item)
+        print("Cart",tabbar.cart)
     }
 
     private func setupDetails() {
-        itemImageView.image = UIImage(named: "clouds")
+        imageLikesLabel.text = "\(picImages.count) users liked this item."
         view.addSubview(addToCardButton)
         view.addSubview(likesLabel)
         view.addSubview(favButton)
@@ -138,6 +147,8 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
         view.addSubview(separatorView)
         view.addSubview(itemImageView)
         view.addSubview(likeCollectionview)
+        view.addSubview(imageLikesLabel)
+        view.addSubview(separatorView2)
         
         NSLayoutConstraint.activate([
             favButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
@@ -160,20 +171,34 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
             itemImageView.widthAnchor.constraint(equalToConstant: 195),
             itemImageView.heightAnchor.constraint(equalToConstant: 195),
             
-            addToCardButton.widthAnchor.constraint(equalToConstant: 334),
+            addToCardButton.widthAnchor.constraint(equalToConstant: view.frame.width - 40),
             addToCardButton.heightAnchor.constraint(equalToConstant: 40),
             addToCardButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 345),
             addToCardButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            imageLikesLabel.topAnchor.constraint(equalTo: addToCardButton.bottomAnchor, constant: 30),
+            imageLikesLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            separatorView.topAnchor.constraint(equalTo: view.topAnchor, constant: 260),
+            separatorView.widthAnchor.constraint(equalToConstant: view.frame.width - 40),
+            separatorView.heightAnchor.constraint(equalToConstant: 0.5),
+            separatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+       
+            separatorView2.topAnchor.constraint(equalTo: view.topAnchor, constant: 440),
+            separatorView2.widthAnchor.constraint(equalToConstant: view.frame.width - 40),
+            separatorView2.heightAnchor.constraint(equalToConstant: 0.5),
+            separatorView2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             ])
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return picImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath)
-        myCell.backgroundColor = .blue
+        let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as! HomeDetailCellCollectionViewCell
         myCell.layer.cornerRadius = 25
+        let pic = picImages[indexPath.row]
+        myCell.userLikeImages.image = UIImage(named: pic)
         return myCell
     }
 }

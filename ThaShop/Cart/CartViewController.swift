@@ -8,8 +8,7 @@
 
 import UIKit
 
-final class CartViewController: UIViewController, AddItemsToCart {
-    var item: [Cart] = []
+final class CartViewController: UIViewController {
     let cellID = "cart"
     
     let cartCollectionView: UICollectionView = {
@@ -48,7 +47,6 @@ final class CartViewController: UIViewController, AddItemsToCart {
     let subtotalPrice: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "$500.00"
         return label
     }()
     
@@ -62,23 +60,31 @@ final class CartViewController: UIViewController, AddItemsToCart {
     let totalLabelPrice: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "$500.00"
+        label.text = "$0.00"
         return label
     }()
     
-    override func viewDidAppear(_ animated: Bool) {
-        if item.isEmpty {
-            let alert = UIAlertController(title: "Cart Items", message: "Your cart is empty", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
-            alert.addAction(action)
-            present(alert, animated: true, completion: nil)
-        }
-        cartCollectionView.reloadData()
+    lazy private var checkoutButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("CHECKOUT", for: .normal)
+        button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(checkout), for: .touchUpInside)
+        button.backgroundColor = .red
+        return button
+    }()
+    
+    @objc func checkout() {
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        //tab.cart.removeAll()
+        let tab = tabBarController as! ShopTabBarVC
+        print(tab.cart.count)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(item.count)
         cartCollectionView.delegate = self
         cartCollectionView.dataSource = self
         
@@ -89,9 +95,10 @@ final class CartViewController: UIViewController, AddItemsToCart {
         view.addSubview(subtotalPrice)
         view.addSubview(taxLabelPrice)
         view.addSubview(totalLabelPrice)
+        view.addSubview(checkoutButton)
         
-        print("List: ",item)
         setupLabels()
+        cartCollectionView.reloadData()
     }
     
     private func setupLabels() {
@@ -113,26 +120,64 @@ final class CartViewController: UIViewController, AddItemsToCart {
             
             totalLabelPrice.topAnchor.constraint(equalTo: view.topAnchor, constant: 450),
             totalLabelPrice.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            
+            checkoutButton.widthAnchor.constraint(equalToConstant: 334),
+            checkoutButton.heightAnchor.constraint(equalToConstant: 40),
+            checkoutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 500),
+            checkoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             ])
     }
 }
 
 extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return item.count
+        let tab = tabBarController as! ShopTabBarVC
+        if tab.cart.count == 0 {
+            self.cartCollectionView.setEmptyMessage("Your cart is empty.", backgroundColor: UIColor.clear, textColor: UIColor.lightGray)
+        } else {
+        return tab.cart.count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = cartCollectionView.dequeueReusableCell(withReuseIdentifier: "cart", for: indexPath) as! CartCell
-        let cart = item[indexPath.row]
-        let vc = HomeItemsDetailController()
-        cell.itemName.text = cart.itemName 
-        cell.priceLabel.text = cart.priceLabel
+        let tabbar = tabBarController as! ShopTabBarVC
+        let cart = tabbar.cart[indexPath.row]
+        cell.itemName.text = cart["title"]
+        cell.priceLabel.text = "$\(cart["price"] ?? "Unknown")"
         cell.quantityLabel.text = "1"
-        cell.itemImage.image = UIImage(named: vc.imagePassed)
+        cell.itemImage.image = UIImage(named: cart["image"]!)
+        
+        self.subtotalPrice.text = cart["price"] ?? "$0.00"
+        
+        DispatchQueue.main.async {
+            self.cartCollectionView.reloadData()
+        }
         
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
     
+}
+
+extension UICollectionView {
     
+    func setEmptyMessage(_ message: String, backgroundColor: UIColor, textColor: UIColor) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = textColor
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont(name: "TrebuchetMS", size: 18)
+        messageLabel.sizeToFit()
+        
+        self.backgroundView = messageLabel
+        self.backgroundView?.backgroundColor = backgroundColor
+    }
+    
+    func restore() {
+        self.backgroundView = nil
+    }
 }

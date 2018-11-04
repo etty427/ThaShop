@@ -65,7 +65,6 @@ final class HomeItemsTableViewCell: UITableViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .lightGray
-        view.frame = CGRect(x: 20, y: 210, width: 330, height: 0.5)
         return view
     }()
     
@@ -100,14 +99,14 @@ final class HomeItemsTableViewCell: UITableViewCell {
             favButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
             
             itemLabel.topAnchor.constraint(equalTo: topAnchor, constant: 220),
-            itemLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
+            itemLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 40),
             
             priceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 220),
-            priceLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 260),
+            priceLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 280),
             priceLabel.widthAnchor.constraint(equalToConstant: 100),
             
             likeButton.topAnchor.constraint(equalTo: topAnchor, constant: 240),
-            likeButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
+            likeButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 40),
             
             likesLabel.topAnchor.constraint(equalTo: topAnchor, constant: 247),
             likesLabel.leftAnchor.constraint(equalTo: likeButton.rightAnchor, constant: 7),
@@ -115,7 +114,12 @@ final class HomeItemsTableViewCell: UITableViewCell {
             itemImageView.topAnchor.constraint(equalTo: topAnchor, constant: 50),
             itemImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             itemImageView.widthAnchor.constraint(equalToConstant: 125),
-            itemImageView.heightAnchor.constraint(equalToConstant: 125)
+            itemImageView.heightAnchor.constraint(equalToConstant: 125),
+            
+            separatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            separatorView.topAnchor.constraint(equalTo: topAnchor, constant: 200),
+            //separatorView.widthAnchor.constraint(equalToConstant: 375),
+            separatorView.heightAnchor.constraint(equalToConstant: 0.5),
             ])
     }
 
