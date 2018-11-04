@@ -90,7 +90,6 @@ final class CartViewController: UIViewController, AddItemsToCart {
         view.addSubview(taxLabelPrice)
         view.addSubview(totalLabelPrice)
         
-        print("List: ",item)
         setupLabels()
     }
     
@@ -133,6 +132,4 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
-    
-    
 }
