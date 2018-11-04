@@ -12,7 +12,13 @@ protocol SlideMenuDelegate {
     func slideMenuSelectedAtIndex(_ index: Int32)
 }
 
-final class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+protocol AddItemsToDict: class {
+    var item: [String:String] { get set }
+}
+
+final class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddItemsToDict {
+    var item: [String : String] = [:]
+    
     
     lazy private var navButtonView: UIView = {
         let view = UIView()
@@ -41,8 +47,9 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
         vc.didMove(toParent: self)
         return vc
     }()
-    lazy private var menuView: UIView = {
-        let view = UIView()
+    var menuView: MenuView = {
+        let view = MenuView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -50,7 +57,12 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
     var itemList:[Item] = []
     var delegate: SlideMenuDelegate?
     let images = ["ipad","fitbit","beats","s9","watch"]
+    var sorted:[String] = []
 
+    override func viewWillAppear(_ animated: Bool) {
+        itemTableView.rowHeight = UITableView.automaticDimension
+        itemTableView.estimatedRowHeight = 100
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -72,17 +84,15 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
         homeItemsDetailController.removeFromParent()
     }
     
+    func sortList() { // should probably be called sort and not filter
+        itemList.sort() { $0.image > $1.image }
+        itemTableView.reloadData()
+    }
+    
     private func setupNavButtonViews() {
         navButtonView.translatesAutoresizingMaskIntoConstraints = false
         navButtonView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
         navButtonView.backgroundColor = .black
-        
-        menuView.translatesAutoresizingMaskIntoConstraints = false
-        menuView.backgroundColor = .lightGray
-        menuView.layer.borderWidth = 3
-        let red = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-        menuView.layer.borderColor = red.cgColor
-        menuView.frame = CGRect(x: 0, y: 50, width: 300, height: view.frame.height)
         
         allButton.translatesAutoresizingMaskIntoConstraints = false
         allButton.backgroundColor = .red
@@ -111,6 +121,8 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
         view.addSubview(trendingButton)
         view.addSubview(homeItemsDetailController.view)
         
+        configureTableView()
+        
         NSLayoutConstraint.activate([
             allButton.topAnchor.constraint(equalTo: view.topAnchor),
             allButton.widthAnchor.constraint(equalToConstant: 105),
@@ -121,8 +133,11 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
             
             trendingButton.leftAnchor.constraint(equalTo: newItemsButton.rightAnchor, constant: 10),
             trendingButton.widthAnchor.constraint(equalToConstant: 105),
+            
+            itemTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            itemTableView.widthAnchor.constraint(equalToConstant: view.frame.width),
+            itemTableView.heightAnchor.constraint(equalToConstant: view.frame.height),
             ])
-        configureTableView()
         view.addSubview(menuView)
     }
     
@@ -132,15 +147,15 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
         itemTableView.separatorStyle = .none
         itemTableView.delegate = self
         itemTableView.dataSource = self
-        itemTableView.frame = CGRect(x: 0, y: 50, width: view.frame.width, height:view.frame.height)
         itemTableView.contentInset.bottom = 120
         
         view.addSubview(itemTableView)
     }
     
     @objc func slideOutMenu() {
-        //menuView.isHidden = !menuView.isHidden
-       menuView.slideInFromLeft()
+        UIView.animate(withDuration: 0.4, animations: {
+            self.menuView.isHidden = !self.menuView.isHidden
+        }, completion: nil)
     }
     
     private func loadJson() {
@@ -204,9 +219,20 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
             vc.commentsPassed = "\(maindata.comments)"
             vc.pricePassed = "\(maindata.price)"
             vc.imagePassed = image
+            let tabbar = tabBarController as! ShopTabBarVC
+            tabbar.item["title"] = maindata.title
+            tabbar.item["price"] = "\(maindata.price)"
+            tabbar.item["image"] = image
+            print("SAved",tabbar.item)
             navigationController?.pushViewController(vc, animated: true)
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vc = segue.destination as? AddItemsToDict
+            else { fatalError("wrong vc type") }
+        vc.item = item
+    }
 }
+
 extension UIView {
     // Name this function in a way that makes sense to you...
     // slideFromLeft, slideRight, slideLeftToRight, etc. are great alternative names
@@ -228,5 +254,70 @@ extension UIView {
         
         // Add the animation to the View's layer
         self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
+    }
+}
+final class MenuView: UIView {
+    lazy private var registerButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Register", for: .normal)
+        button.layer.cornerRadius = 5
+        //button.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
+        button.backgroundColor = .red
+        return button
+    }()
+    
+    lazy private var loginButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Login", for: .normal)
+        button.layer.cornerRadius = 5
+        //button.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
+        button.backgroundColor = .red
+        return button
+    }()
+    
+    lazy private var settingsButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Settings", for: .normal)
+        button.layer.cornerRadius = 5
+        //button.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
+        button.backgroundColor = .red
+        return button
+    }()
+    
+    private let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.spacing = 16.0
+        return stack
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        backgroundColor = .lightGray
+        layer.borderWidth = 3
+        let red = UIColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+        layer.borderColor = red.cgColor
+        //CGRect(x: 0, y: 50, width: 300, height: frame.height)
+        
+        stackView.addArrangedSubview(stackView)
+        stackView.addArrangedSubview(registerButton)
+        stackView.addArrangedSubview(loginButton)
+        stackView.addArrangedSubview(settingsButton)
+        
+        NSLayoutConstraint.activate([
+           // stackView.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+        
+            ])
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
