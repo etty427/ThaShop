@@ -17,9 +17,20 @@ final class NewsCell: UITableViewCell {
         label.textColor = .black
         return label
     }()
+    
+    let articleImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        //image.frame = CGRect(x: 20, y: 10, width: 50, height: 50)
+        return image
+    }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        title.numberOfLines = 3
+        title.lineBreakMode = .byWordWrapping
+        
+        articleImage.backgroundColor = .blue
     }
     
     let vc = NewsViewController()
@@ -28,6 +39,7 @@ final class NewsCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         addSubview(title)
+        addSubview(articleImage)
         setUpCellView()
     }
     
@@ -41,8 +53,16 @@ final class NewsCell: UITableViewCell {
     
     func setUpCellView() {
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            title.leftAnchor.constraint(equalTo: leftAnchor, constant: 5),
+            articleImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 30),
+            articleImage.widthAnchor.constraint(equalToConstant: 50),
+            articleImage.heightAnchor.constraint(equalToConstant: 50),
+            articleImage.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            title.leftAnchor.constraint(equalTo: articleImage.rightAnchor, constant: 20),
+            title.centerYAnchor.constraint(equalTo: centerYAnchor),
+            title.widthAnchor.constraint(equalTo: widthAnchor, constant: 200),
+            title.heightAnchor.constraint(equalToConstant: 60),
+
             ])
     }
 }

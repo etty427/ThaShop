@@ -13,7 +13,7 @@ class HomeDetailCellCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        layer.cornerRadius = 25
     }
 
 }

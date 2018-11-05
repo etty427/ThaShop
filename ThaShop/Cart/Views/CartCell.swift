@@ -19,10 +19,6 @@ class CartCell: UICollectionViewCell {
         let actionDelete = UIAlertAction(title: "Yes, I'm sure.", style: .default) { (actionDelete) in
             print("Deleted")
             let cartItems = ShopTabBarVC()
-            for item in cartItems.cart {
-                print(item.keys)
-            }
-            //cartItems.cart.remove(at: item)
         }
         let actionCancel = UIAlertAction(title: "Cancel", style: .destructive, handler:nil)
         
@@ -35,10 +31,4 @@ class CartCell: UICollectionViewCell {
             cartCollection.cartCollectionView.reloadData()
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
 }

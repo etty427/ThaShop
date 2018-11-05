@@ -23,5 +23,14 @@ final class ShopTabBarVC: UITabBarController, AddItemsToDict {
 
         tabBar.barTintColor = .black
         tabBar.tintColor = .white
+        
+    }
+    func addBadgeToCart() {
+        if let tabItems = tabBar.items {
+            // In this case we want to modify the badge number of the third tab:
+            let tabItem = tabItems[2]
+            
+            tabItem.badgeValue = "\(cart.count)"
+        }
     }
 }

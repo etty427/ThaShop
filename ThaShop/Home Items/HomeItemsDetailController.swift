@@ -133,7 +133,27 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
         addToCardButton.setTitle("Added to Cart", for: .normal)
         let tabbar = tabBarController as! ShopTabBarVC
         tabbar.cart.append(tabbar.item)
+        tabbar.addBadgeToCart()
         print("Cart",tabbar.cart)
+        popUpCartMenu()
+    }
+    
+    private func popUpCartMenu() {
+        let alert = UIAlertController(title: "", message: "\(titlePassed)  $\(pricePassed)", preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "Go to Cart", style: .default) { (action) in
+            
+        }
+        let imgTitle = UIImage(named:"cart")
+        let imgViewTitle = UIImageView(frame: CGRect(x: 60, y: 20, width: 30, height: 30))
+        imgViewTitle.image = imgTitle
+        
+        //alert.view.addSubview(imgViewTitle)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            alert.dismiss(animated: false, completion: nil)
+        }
     }
 
     private func setupDetails() {
@@ -196,7 +216,6 @@ final class HomeItemsDetailController: UIViewController, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as! HomeDetailCellCollectionViewCell
-        myCell.layer.cornerRadius = 25
         let pic = picImages[indexPath.row]
         myCell.userLikeImages.image = UIImage(named: pic)
         return myCell
