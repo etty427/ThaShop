@@ -81,7 +81,7 @@ final class NewsViewController: UIViewController {
         newsTableView.rowHeight = UITableView.automaticDimension
         newsTableView.showsHorizontalScrollIndicator = false
         newsTableView.showsVerticalScrollIndicator = false
-        newsTableView.bounces = false
+        newsTableView.contentInset.bottom = 90
         newsTableView.frame = CGRect(x: 0, y: 20, width: view.frame.width, height: view.frame.height)
         
         view.addSubview(newsTableView)
@@ -96,9 +96,8 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NewsCell
-        cell.title.lineBreakMode = .byTruncatingHead
-        cell.title.text = articles[indexPath.row].headline
-        //cell.imageView?.downloadImage(from: articles[indexPath.row].urlImage!)
+        cell.title.text = articles[indexPath.row].headline ?? "Title Unknown"
+        cell.articleImage.downloaded(from: articles[indexPath.row].urlImage ?? "clouds")
         return cell
     }
     
@@ -111,23 +110,33 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(newsDetailViewController, animated: true)
+        newsTableView.deselectRow(at: indexPath, animated: true)
+        let news = articles[indexPath.row]
+        if let url = URL(string: news.url) {
+            UIApplication.shared.openURL(url)
+        }
+        // Add webview to keep user in app!!
     }
 }
 
 extension UIImageView {
-    func downloadImage(from url:String) {
-        let urlRequest = URLRequest(url: URL(string:url)!)
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            if error != nil {
-                print(error.debugDescription)
-                return
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() {
+                self.image = image
             }
-            DispatchQueue.main.async {
-                self.image = UIImage(data: data!)
-            }
-        }
-        task.resume()
+            }.resume()
+    }
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url, contentMode: mode)
     }
 }
 
