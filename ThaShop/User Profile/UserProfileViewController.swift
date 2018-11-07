@@ -21,7 +21,6 @@ final class UserProfileViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("LOGOUT", for: .normal)
         button.setTitleColor(UIColor(named: "white"), for: .normal)
-        button.frame = CGRect(x: 15, y: 500, width: 346, height: 40)
         button.layer.cornerRadius = 10
         button.backgroundColor = .red
         return button
@@ -60,7 +59,11 @@ final class UserProfileViewController: UIViewController {
     
     func setupView() {
         NSLayoutConstraint.activate([
-        
+            //button.frame = CGRect(x: 15, y: 500, width: 346, height: 40)
+            logoutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 500),
+            logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoutButton.widthAnchor.constraint(equalToConstant: 346),
+            logoutButton.heightAnchor.constraint(equalToConstant: 40),
             ])
     }
 }
@@ -73,6 +76,8 @@ extension UserProfileViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = profileTableView.dequeueReusableCell(withIdentifier: "profile", for: indexPath) as! UserProfileTableViewCell
+        
+        cell.profileImage.image = UIImage(named: "guy1")
         
         return cell
     }
