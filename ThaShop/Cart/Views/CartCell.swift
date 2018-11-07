@@ -31,4 +31,10 @@ class CartCell: UICollectionViewCell {
             cartCollection.cartCollectionView.reloadData()
         }
     }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.cornerRadius = 10
+    }
 }

@@ -97,7 +97,7 @@ final class CartViewController: UIViewController {
         view.addSubview(taxLabelPrice)
         view.addSubview(totalLabelPrice)
         view.addSubview(checkoutButton)
-        
+        view.backgroundColor = UIColor(displayP3Red: 247, green: 247, blue: 247, alpha: 1)
         setupLabels()
         cartCollectionView.reloadData()
     }

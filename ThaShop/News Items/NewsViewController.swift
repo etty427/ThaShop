@@ -98,6 +98,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NewsCell
         cell.title.text = articles[indexPath.row].headline ?? "Title Unknown"
         cell.articleImage.downloaded(from: articles[indexPath.row].urlImage ?? "clouds")
+        
         return cell
     }
     
