@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="513.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="lQ6-BK-Raj">
-                        <rect key="frame" x="16" y="53" width="288" height="406"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="lQ6-BK-Raj">
+                        <rect key="frame" x="26" y="41" width="288" height="374"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="aKK-uK-d4U">
                                 <rect key="frame" x="94" y="0.0" width="100" height="100"/>
@@ -29,8 +29,8 @@
                                     <constraint firstAttribute="width" constant="100" id="rqK-YD-F6d"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tim Cook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9V-1X-9cm">
-                                <rect key="frame" x="93" y="117" width="102" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tim Cook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="z9V-1X-9cm">
+                                <rect key="frame" x="93" y="115" width="102" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="1YK-p8-h0Q"/>
                                     <constraint firstAttribute="width" constant="102" id="9I6-lJ-5OU"/>
@@ -39,8 +39,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;I love to buy vinyl records, iPads, and other tech gdgets!&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MP5-f5-fgp">
-                                <rect key="frame" x="0.0" y="170" width="288" height="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;I love to buy vinyl records, iPads, and other tech gdgets!&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="MP5-f5-fgp">
+                                <rect key="frame" x="0.0" y="166" width="288" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="288" id="4Bk-9K-xQ8"/>
                                     <constraint firstAttribute="height" constant="50" id="zb3-JT-IRc"/>
@@ -50,7 +50,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iI-jO-jYy">
-                                <rect key="frame" x="0.0" y="237" width="288" height="1"/>
+                                <rect key="frame" x="0.0" y="217" width="288" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="288" id="J0H-rL-LWl"/>
@@ -58,7 +58,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lm4-0W-3Ma">
-                                <rect key="frame" x="109.5" y="255" width="69" height="21"/>
+                                <rect key="frame" x="109.5" y="233" width="69" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Wj0-o2-k2K"/>
                                     <constraint firstAttribute="width" constant="69" id="nAJ-a2-His"/>
@@ -68,7 +68,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1Y-4a-9ZY">
-                                <rect key="frame" x="0.0" y="293" width="288" height="1"/>
+                                <rect key="frame" x="0.0" y="269" width="288" height="1"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Ia9-SF-Ud8"/>
@@ -76,7 +76,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Buy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8y-KX-62Y">
-                                <rect key="frame" x="118" y="311" width="52" height="21"/>
+                                <rect key="frame" x="118" y="285" width="52" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="52" id="50K-gp-nfV"/>
                                     <constraint firstAttribute="height" constant="21" id="rhe-ID-S5s"/>
@@ -86,7 +86,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gka-kX-HFH">
-                                <rect key="frame" x="0.0" y="349" width="288" height="1"/>
+                                <rect key="frame" x="0.0" y="321" width="288" height="1"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="288" id="EY3-Ff-zgg"/>
@@ -94,7 +94,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchases" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9g-1F-bGh">
-                                <rect key="frame" x="104" y="367" width="80" height="21"/>
+                                <rect key="frame" x="104" y="337" width="80" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="2cj-Nk-Mdb"/>
                                     <constraint firstAttribute="width" constant="80" id="N4N-dQ-GPx"/>
@@ -104,7 +104,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYw-es-mxl">
-                                <rect key="frame" x="0.0" y="405" width="288" height="1"/>
+                                <rect key="frame" x="0.0" y="373" width="288" height="1"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="288" id="b7L-Nf-FB1"/>
@@ -115,13 +115,18 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="lQ6-BK-Raj" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="GPH-V2-Xao"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="lQ6-BK-Raj" secondAttribute="bottom" constant="44" id="T5x-hc-RLN"/>
-                    <constraint firstItem="lQ6-BK-Raj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="22" id="ZX3-tz-EsM"/>
-                    <constraint firstItem="lQ6-BK-Raj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="fcb-3z-6n4"/>
+                    <constraint firstItem="lQ6-BK-Raj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="IfN-Bh-DVL"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="lQ6-BK-Raj" secondAttribute="bottom" constant="10" id="Tdk-zQ-7YQ"/>
+                    <constraint firstItem="lQ6-BK-Raj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="bt6-BH-wEN"/>
+                    <constraint firstItem="lQ6-BK-Raj" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="10" id="g4b-3m-qzc"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="mottoLabel" destination="MP5-f5-fgp" id="xWB-6p-dgQ"/>
+                <outlet property="profileImage" destination="aKK-uK-d4U" id="2U6-8q-zeK"/>
+                <outlet property="usernameLabel" destination="z9V-1X-9cm" id="Fgx-po-G3v"/>
+            </connections>
             <point key="canvasLocation" x="54.399999999999999" y="276.1619190404798"/>
         </tableViewCell>
     </objects>
