@@ -20,6 +20,7 @@ final class CartViewController: UIViewController {
         collection.register(UINib(nibName: "CartCell", bundle: nil), forCellWithReuseIdentifier: "cart")
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = .white
+        collection.showsHorizontalScrollIndicator = false
         return collection
     }()
     
@@ -79,8 +80,8 @@ final class CartViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         //tab.cart.removeAll()
-        let tab = tabBarController as! ShopTabBarVC
-        print(tab.cart.count)
+        cartCollectionView.reloadData()
+        self.subtotalPrice.text = "$0.00"
     }
     
     override func viewDidLoad() {
@@ -96,7 +97,7 @@ final class CartViewController: UIViewController {
         view.addSubview(taxLabelPrice)
         view.addSubview(totalLabelPrice)
         view.addSubview(checkoutButton)
-        
+        view.backgroundColor = UIColor(displayP3Red: 247, green: 247, blue: 247, alpha: 1)
         setupLabels()
         cartCollectionView.reloadData()
     }
@@ -123,7 +124,7 @@ final class CartViewController: UIViewController {
             
             checkoutButton.widthAnchor.constraint(equalToConstant: 334),
             checkoutButton.heightAnchor.constraint(equalToConstant: 40),
-            checkoutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 500),
+            checkoutButton.topAnchor.constraint(equalTo: totalLabel.bottomAnchor, constant: 40),
             checkoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             ])
     }
@@ -135,6 +136,7 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if tab.cart.count == 0 {
             self.cartCollectionView.setEmptyMessage("Your cart is empty.", backgroundColor: UIColor.clear, textColor: UIColor.lightGray)
         } else {
+            cartCollectionView.setEmptyMessage("", backgroundColor: .clear, textColor: .white)
         return tab.cart.count
         }
         return 0
@@ -149,7 +151,7 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.quantityLabel.text = "1"
         cell.itemImage.image = UIImage(named: cart["image"]!)
         
-        self.subtotalPrice.text = cart["price"] ?? "$0.00"
+        self.subtotalPrice.text = "$\(cart["price"] ?? "$0.00")"
         
         DispatchQueue.main.async {
             self.cartCollectionView.reloadData()
@@ -157,6 +159,7 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
     

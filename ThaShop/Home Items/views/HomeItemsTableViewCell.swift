@@ -91,6 +91,10 @@ final class HomeItemsTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets.init(top: 5, left: 5, bottom: 5, right: 5))
+        contentView.layer.borderWidth = 1.0
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
+        contentView.layer.cornerRadius = 15
+        contentView.layer.masksToBounds = true
     }
     
     func setupCell() {

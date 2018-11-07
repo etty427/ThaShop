@@ -10,26 +10,75 @@ import UIKit
 
 final class NewsDetailViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        print("New details")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    var newsTitle: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var desc: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var author: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var photo: UIImageView = {
+        let label = UIImageView()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var titlePassed = ""
+    var authorPassed = ""
+    var descriptionPassed = ""
+    var imagePassed = ""
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("New details")
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        newsTitle.text = titlePassed
+        desc.text = descriptionPassed
+        author.text = authorPassed
+        photo.image = UIImage(named: imagePassed)
+        setupView()
+        print(titlePassed)
     }
-    */
-
+    
+    private func setupView() {
+        //newsTitle.text = "This Title"
+        newsTitle.font = .boldSystemFont(ofSize: 30)
+        newsTitle.textAlignment = .center
+        
+        photo.backgroundColor = .blue
+        
+        view.addSubview(newsTitle)
+        view.addSubview(desc)
+        view.addSubview(photo)
+        view.addSubview(author)
+        
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            newsTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            
+            photo.topAnchor.constraint(equalTo: newsTitle.bottomAnchor, constant: 20),
+            photo.widthAnchor.constraint(equalToConstant: 100),
+            photo.heightAnchor.constraint(equalToConstant: 100),
+            
+            desc.topAnchor.constraint(equalTo: photo.bottomAnchor, constant: 20),
+            ])
+    }
 }

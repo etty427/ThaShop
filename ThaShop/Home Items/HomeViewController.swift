@@ -148,7 +148,7 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
         itemTableView.delegate = self
         itemTableView.dataSource = self
         itemTableView.contentInset.bottom = 120
-        
+        itemTableView.showsVerticalScrollIndicator = false
         view.addSubview(itemTableView)
     }
     
@@ -192,16 +192,12 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! HomeItemsTableViewCell
-        cell.contentView.layer.borderWidth = 1.0
-        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
-        cell.contentView.layer.cornerRadius = 15
-        cell.contentView.layer.masksToBounds = true
-        cell.itemImageView.image = UIImage(named: images[indexPath.row])
         
         let item = itemList[indexPath.row]
         cell.priceLabel.text = "$" + "\(item.price)"
         cell.itemLabel.text = item.title
         cell.likesLabel.text = "\(item.likes)"
+        cell.itemImageView.image = UIImage(named: images[indexPath.row])
         return cell
     }
     
@@ -210,7 +206,7 @@ final class HomeViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        itemTableView.deselectRow(at: indexPath, animated: true)
             let vc = HomeItemsDetailController()
             let maindata = itemList[indexPath.row]
             let image = images[indexPath.row]
