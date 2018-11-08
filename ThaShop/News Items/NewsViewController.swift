@@ -31,6 +31,7 @@ final class NewsViewController: UIViewController {
         configureTableView()
         self.navigationItem.title = "Tech News"
         newsTableView.register(NewsCell.self, forCellReuseIdentifier: cellId)
+        newsTableView.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: cellId)
         fetchNews()
     }
     
@@ -96,8 +97,8 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NewsCell
-        cell.title.text = articles[indexPath.row].headline ?? "Title Unknown"
-        cell.articleImage.downloaded(from: articles[indexPath.row].urlImage ?? "clouds")
+        cell.newsTitleLabel.text = articles[indexPath.row].headline ?? "Title Unknown"
+        cell.newsImage.downloaded(from: articles[indexPath.row].urlImage ?? "clouds")
         
         return cell
     }
@@ -113,10 +114,9 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         newsTableView.deselectRow(at: indexPath, animated: true)
         let news = articles[indexPath.row]
-        if let url = URL(string: news.url) {
-            UIApplication.shared.openURL(url)
-        }
-        // Add webview to keep user in app!!
+        let webVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "web") as! WebViewController
+        webVC.url = news.url
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
 }
 

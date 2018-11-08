@@ -10,6 +10,8 @@ import UIKit
 
 final class NewsCell: UITableViewCell {
     
+    @IBOutlet weak var newsImage: UIImageView!
+    @IBOutlet weak var newsTitleLabel: UILabel!
     lazy var title: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -21,15 +23,11 @@ final class NewsCell: UITableViewCell {
     let articleImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        //image.frame = CGRect(x: 20, y: 10, width: 50, height: 50)
         return image
     }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        title.numberOfLines = 3
-        title.lineBreakMode = .byWordWrapping
-        
         articleImage.backgroundColor = .blue
     }
     
@@ -38,13 +36,13 @@ final class NewsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubview(title)
-        addSubview(articleImage)
-        setUpCellView()
+        //addSubview(title)
+        //addSubview(articleImage)
+        //setUpCellView()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

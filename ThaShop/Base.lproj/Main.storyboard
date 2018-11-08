@@ -37,10 +37,47 @@
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
                     <navigationItem key="navigationItem" id="cVF-cO-91E"/>
+                    <connections>
+                        <segue destination="Kxq-wj-Gcu" kind="show" identifier="web" id="Ivd-dw-eiE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="153" y="1529"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="06r-Lu-xRM">
+            <objects>
+                <viewController storyboardIdentifier="web" id="Kxq-wj-Gcu" customClass="WebViewController" customModule="ThaShop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6ze-Ej-fCJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFa-fe-sg0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DFa-fe-sg0" firstAttribute="trailing" secondItem="zyf-0V-1Ff" secondAttribute="trailing" id="6KN-4x-fnK"/>
+                            <constraint firstItem="DFa-fe-sg0" firstAttribute="top" secondItem="zyf-0V-1Ff" secondAttribute="top" id="O6G-cV-aUz"/>
+                            <constraint firstItem="DFa-fe-sg0" firstAttribute="leading" secondItem="zyf-0V-1Ff" secondAttribute="leading" id="VQ6-79-D8l"/>
+                            <constraint firstItem="DFa-fe-sg0" firstAttribute="bottom" secondItem="zyf-0V-1Ff" secondAttribute="bottom" id="x6E-AW-CFt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zyf-0V-1Ff"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="DFa-fe-sg0" id="xCq-MM-wzL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ncn-Ej-UYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="143.19999999999999" y="2202.5487256371816"/>
         </scene>
         <!--CART-->
         <scene sceneID="nb6-Zi-bJI">
