@@ -28,13 +28,14 @@
 		3483259521422E6900FA16B9 /* HomeItemsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483259421422E6900FA16B9 /* HomeItemsDetailController.swift */; };
 		34856400216F272D00DA1B7B /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348563FF216F272D00DA1B7B /* Article.swift */; };
 		34856402216FD27000DA1B7B /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34856401216FD27000DA1B7B /* NewsCell.swift */; };
-		34856404216FD2CC00DA1B7B /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34856403216FD2CC00DA1B7B /* NewsDetailViewController.swift */; };
 		3499369B2180C4D0009B32EB /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3499369A2180C4D0009B32EB /* CartViewController.swift */; };
 		3499369F2180CD1F009B32EB /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3499369D2180CD1F009B32EB /* CartCell.swift */; };
 		349936A02180CD1F009B32EB /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3499369E2180CD1F009B32EB /* CartCell.xib */; };
 		349BE1AB218ABA1400E3CEF3 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349BE1AA218ABA1400E3CEF3 /* Cart.swift */; };
 		349BE1B0218E2AF000E3CEF3 /* HomeDetailCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349BE1AE218E2AF000E3CEF3 /* HomeDetailCellCollectionViewCell.swift */; };
 		349BE1B1218E2AF000E3CEF3 /* HomeDetailCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349BE1AF218E2AF000E3CEF3 /* HomeDetailCellCollectionViewCell.xib */; };
+		34B43BDA219347DC00FA556A /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34B43BD9219347DC00FA556A /* NewsCell.xib */; };
+		34B43BDC219400DA00FA556A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B43BDB219400DA00FA556A /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,13 +83,14 @@
 		3483259421422E6900FA16B9 /* HomeItemsDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeItemsDetailController.swift; sourceTree = "<group>"; };
 		348563FF216F272D00DA1B7B /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		34856401216FD27000DA1B7B /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
-		34856403216FD2CC00DA1B7B /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		3499369A2180C4D0009B32EB /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		3499369D2180CD1F009B32EB /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		3499369E2180CD1F009B32EB /* CartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartCell.xib; sourceTree = "<group>"; };
 		349BE1AA218ABA1400E3CEF3 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		349BE1AE218E2AF000E3CEF3 /* HomeDetailCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		349BE1AF218E2AF000E3CEF3 /* HomeDetailCellCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeDetailCellCollectionViewCell.xib; sourceTree = "<group>"; };
+		34B43BD9219347DC00FA556A /* NewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
+		34B43BDB219400DA00FA556A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,7 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				34439D3F213F844700D11713 /* NewsViewController.swift */,
-				34856403216FD2CC00DA1B7B /* NewsDetailViewController.swift */,
+				34B43BDB219400DA00FA556A /* WebViewController.swift */,
 				34856406216FD2F500DA1B7B /* views */,
 			);
 			path = "News Items";
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				34856401216FD27000DA1B7B /* NewsCell.swift */,
+				34B43BD9219347DC00FA556A /* NewsCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 			files = (
 				349BE1B1218E2AF000E3CEF3 /* HomeDetailCellCollectionViewCell.xib in Resources */,
 				34439D48213F844E00D11713 /* LaunchScreen.storyboard in Resources */,
+				34B43BDA219347DC00FA556A /* NewsCell.xib in Resources */,
 				342972152188363E00736175 /* items.json in Resources */,
 				34439D45213F844E00D11713 /* Assets.xcassets in Resources */,
 				349936A02180CD1F009B32EB /* CartCell.xib in Resources */,
@@ -401,6 +405,7 @@
 				34856400216F272D00DA1B7B /* Article.swift in Sources */,
 				349BE1AB218ABA1400E3CEF3 /* Cart.swift in Sources */,
 				34439D6C213F881500D11713 /* ShopTabBarVC.swift in Sources */,
+				34B43BDC219400DA00FA556A /* WebViewController.swift in Sources */,
 				340E3D9D2159D61600778ECC /* UserViewModel.swift in Sources */,
 				34439D40213F844700D11713 /* NewsViewController.swift in Sources */,
 				349BE1B0218E2AF000E3CEF3 /* HomeDetailCellCollectionViewCell.swift in Sources */,
@@ -409,7 +414,6 @@
 				3474C847215D5D3D0004420B /* API.swift in Sources */,
 				34439D3C213F844700D11713 /* AppDelegate.swift in Sources */,
 				3474C84B215D5DDA0004420B /* Item.swift in Sources */,
-				34856404216FD2CC00DA1B7B /* NewsDetailViewController.swift in Sources */,
 				340E3DA02159D65E00778ECC /* User.swift in Sources */,
 				3499369F2180CD1F009B32EB /* CartCell.swift in Sources */,
 				34856402216FD27000DA1B7B /* NewsCell.swift in Sources */,
