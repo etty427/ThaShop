@@ -60,7 +60,10 @@ final class UserProfileViewController: UIViewController {
     
     func setupView() {
         NSLayoutConstraint.activate([
-        
+            logoutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 500),
+            logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoutButton.widthAnchor.constraint(equalToConstant: 346),
+            logoutButton.heightAnchor.constraint(equalToConstant: 40),
             ])
     }
 }
